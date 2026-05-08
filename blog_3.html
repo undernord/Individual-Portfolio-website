@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoughts & Insights | VI.STUDIO</title>
+    
+    <!-- 核心：完全依赖外部 CSS，实现代码分离 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 🌟 恢复自定义光标 -->
+    <div id="cursor"></div>
+
+    <!-- 独立的精美导航栏，已补回切换按钮和 hover 效果 -->
+    <header class="standalone-header">
+        <a href="index.html" class="standalone-logo hover-target"><span></span>STUDIO</a>
+        <div style="display: flex; align-items: center; gap: 40px;">
+            <nav class="standalone-nav">
+                <!-- 增加了 t-* 翻译标签，确保中英切换时导航跟着变 -->
+                <a href="index.html#about" class="hover-target t-about">ABOUT</a>
+                <a href="#" class="active hover-target t-blogs">BLOGS</a>
+                <a href="index.html#portfolio-3d" class="hover-target t-portfolio">PORTFOLIO</a>
+                <a href="index.html#contact" class="hover-target t-contact">CONTACT</a>
+            </nav>
+            <!-- 🌟 恢复中英与日夜切换按钮 -->
+            <div class="ctrl-btns">
+                <div class="lang-switcher-wrap" onclick="toggleLang()">
+                    <div class="lang-btn-box hover-target"><span id="lang-label">EN</span></div>
+                </div>
+                <div class="theme-switcher-wrap" onclick="toggleTheme()">
+                    <div class="theme-btn-box hover-target"><span id="theme-icon">◐</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="blogs-page-main">
+        <article class="blog-flow-wrapper">
+            
+            <header class="blog-header">
+                <div class="blog-tag">Technical Insight</div>
+                <!-- 加上 t-b1 让标题也能支持双语切换 -->
+                <h1 class="blog-title t-b3">t</h1>
+                <div class="blog-meta">
+                    <div class="meta-box"><span>DATE</span><b>2024.05.07</b></div>
+                    <div class="meta-box"><span>AUTHOR</span><b>YOUR NAME</b></div>
+                    <div class="meta-box"><span>TAGS</span><b>#ThreeJS #TA</b></div>
+                </div>
+            </header>
+
+            <!-- 博客主图 -->
+            <img src="ref/blogs/hero3.png" class="blog-hero" alt="Hero">
+
+            <!-- 博客正文 -->
+            <div class="blog-content-body">
+                <p class="blog-text">
+                    <strong>When</strong> people think about animation, they usually imagine 
+                    colorful characters, exaggerated movements, or entertaining 
+                    stories. However, one of the most fascinating aspects of animation 
+                    is communication. Animation is not only about dialogue. 
+                    It is about emotions, atmosphere, silence, and the invisible 
+                    connections between characters and audiences.
+                </p>
+                <p class="blog-text">
+                    Recently, while watching<em> Rick and Morty Season 7 </em>, I noticed how 
+                    naturally the series presents communication between partners and 
+                    family members. The characters are often blunt, emotionally chaotic, 
+                    and brutally honest with one another. Even in absurd situations, 
+                    their conversations still feel deeply human. Through fast-paced dialogue, 
+                    exaggerated expressions, and emotional conflict, the show reflects the 
+                    complexity of modern relationships.
+                </p>
+                <img src="ref/blogs/movie.png" class="blog-image" alt="Process">
+                
+                <p class="blog-text">
+                    This made me realize that communication in animation goes far 
+                    beyond simply conveying information. At its core, animation creates 
+                    emotional responses. It allows audiences to feel tension, loneliness, 
+                    warmth, or connection, sometimes without needing many words at all.
+                </p>
+                
+                <h3 class="blog-subtitle">01. The Unique Power of Animation</h3>
+
+                <p class="blog-text">
+                    <strong>One</strong> of the most remarkable qualities of animation is its versatility. 
+                    It can move effortlessly from energetic comedy to quiet introspection. 
+                    A scene may begin with exaggerated humor and suddenly transition into 
+                    a deeply emotional moment.
+                </p>
+                <p class="blog-text">
+                    Because animation is not limited by realism, creators are able to 
+                    exaggerate feelings visually. A character's movement, facial expression, 
+                    color palette, or even the pacing of a scene can communicate emotions 
+                    more effectively than dialogue. In this way, animation becomes a language 
+                    of its own.
+                </p>
+                <p class="blog-text">
+                    Different cultural contexts also influence how communication is 
+                    portrayed in animation. Some stories rely on direct emotional expression, 
+                    while others communicate through subtle implication and silence.
+                </p>
+                <h3 class="blog-subtitle">02. When Silence Speaks Louder Than Dialogue</h3>
+
+                <p class="blog-text">
+                    <strong>A</strong> powerful example of this can be found in<em> Neon Genesis Evangelion</em>, 
+                    especially in the relationship between Shinji Ikari and Gendo Ikari.
+                </p>
+                <p class="blog-text">
+                    Their father-son relationship remains memorable because of the emotional 
+                    distance between them. Through long silences, restrained dialogue, and 
+                    empty visual space, the anime creates a profound sense of separation. 
+                    Instead of dramatic speeches, the emotional tension is communicated through 
+                    atmosphere and visual composition.
+                </p>
+                <p class="blog-text">
+                    This style of storytelling reflects a more subtle form of communication. 
+                    The audience is expected to interpret emotions from pauses, expressions, 
+                    and silence rather than explicit explanation. In many ways, silence itself 
+                    becomes part of the conversation.
+                </p>
+                <h3 class="blog-subtitle">03. Animation and Cultural Expression</h3>
+
+                <p class="blog-text">
+                    <strong>In</strong> the early 21st century, American animation also began exploring
+                    elements of Chinese culture, introducing audiences to storytelling
+                    styles different from familiar Western narratives. These works often
+                    portrayed characters with more nuanced emotions and subtle dialogue,
+                    sometimes described as “high-context” expression where meaning is
+                    implied rather than directly stated.
+                </p>
+
+                <p class="blog-text">
+                    At the same time, Chinese animation has continued to showcase the
+                    richness of Chinese culture through mythology, martial arts, folklore,
+                    and historical themes. Creating characters within these diverse settings
+                    is not a simple task. The personality, behavior, and communication style
+                    of a character are often shaped by their environment and cultural background.
+                </p>
+
+                <p class="blog-text">
+                    This relationship between character and setting is part of what gives
+                    Chinese animation its distinctive charm. It also demonstrates how
+                    animation can preserve and communicate cultural identity.
+                </p>
+
+                <h3 class="blog-subtitle">04. Communication Beyond the Screen</h3>
+
+                <p class="blog-text">
+                    <strong>Communication</strong> in animation does not only exist between characters.
+                    It also exists behind the scenes.
+                </p>
+
+                <p class="blog-text">
+                    Animation is an intensely collaborative art form that brings together
+                    writers, storyboard artists, animators, voice actors, designers, and
+                    directors. Different ideas and creative perspectives must come together
+                    to form a unified vision. In many ways, every animated work is itself
+                    the result of communication and teamwork.
+                </p>
+
+                <p class="blog-text">
+                    Perhaps this is why animation feels so emotionally powerful.
+                    It reflects not only fictional emotions, but also real human
+                    understanding and collaboration.
+                </p>
+
+                <h3 class="blog-subtitle">Final Thoughts</h3>
+
+                <p class="blog-text">
+                    <strong>Although</strong> many of these examples focus on parent-child relationships
+                    and family dynamics, they ultimately reveal something much broader
+                    about human communication.
+                </p>
+
+                <p class="blog-text">
+                    Animation has the ability to transcend language and cultural
+                    barriers through emotion, visual storytelling, and imagination.
+                    Whether through direct dialogue, subtle implication, or meaningful
+                    silence, animation communicates experiences that audiences around
+                    the world can understand and relate to.
+                </p>
+
+                <p class="blog-text">
+                    In the end, the true beauty of animation lies not only in how
+                    it looks, but in how deeply it allows people to connect with one another.
+                </p>
+            </div>
+
+            <!-- 返回按钮 -->
+            <div class="back-btn-container">
+                <a href="index.html" class="back-btn hover-target">← BACK TO HOME</a>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- 🌟 必须在页面最底部引入 JS，才能让光标和切换按钮动起来 -->
+    <script src="js/script.js"></script>
+</body>
+</html>

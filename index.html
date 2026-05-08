@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/jquery2.1.4.min.js"></script>
+    <script src="js/jquery.i18n.min.js"></script>
+    <script src="js/en-zh_translate.js"></script>
+</head>
+<body>
+
+    <!-- 1. 恢复：2D 致密菱形粒子波浪加载动画 -->
+    <div id="preloader">
+        <div id="particle-diamond"></div>
+        <div id="loader-status" class="loader-text">0%</div>
+    </div>
+
+    <!-- 2. 自定义光标 -->
+    <div id="cursor"></div>
+    
+    <!-- 3. 背景容器 -->
+    <div id="canvas-bg"></div>
+
+    <!-- 4. HUD 侧边栏 -->
+    <div class="hud-pagination">
+        <div class="hud-line"></div>
+        <div class="hud-dot active" data-target="home"><div class="diamond"><span class="num">01</span></div></div>
+        <div class="hud-dot" data-target="about"><div class="diamond"><span class="num">02</span></div></div>
+        <div class="hud-dot" data-target="blogs"><div class="diamond"><span class="num">03</span></div></div>
+        <div class="hud-dot" data-target="portfolio-3d"><div class="diamond"><span class="num">04</span></div></div>
+        <div class="hud-dot" data-target="portfolio-2d"><div class="diamond"><span class="num">05</span></div></div>
+        <div class="hud-dot" data-target="contact"><div class="diamond"><span class="num">06</span></div></div>
+    </div>
+
+    <!-- 5. 顶栏导航 -->
+    <header>
+        <div class="nav-container">
+            <div class="logo hover-target" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><span></span>STUDIO</div>
+            <div class="nav-right-area">
+                <nav class="nav-links">
+                    <div class="nav-item"><a href="#about" class="t-about">ABOUT</a></div>
+                    <div class="nav-item"><a href="#blogs" class="t-blogs">BLOGS</a></div>
+                    <div class="nav-item">
+                        <a href="#portfolio-3d" class="t-portfolio">PORTFOLIO ▼</a>
+                        <div class="dropdown">
+                            <a href="#portfolio-3d" class="t-3d">3D ARCHIVE</a>
+                            <a href="#portfolio-2d" class="t-2d">2D GALLERY</a>
+                        </div>
+                    </div>
+                    <!-- 导航直接指向本页底部的 contact 区块 -->
+                    <div class="nav-item"><a href="#contact" class="t-contact">CONTACT</a></div>
+                </nav>
+                <div class="ctrl-btns">
+                    <!-- 中英切换 -->
+                    <div class="lang-switcher-wrap" id="translate-btn">
+                        <div class="lang-btn-box hover-target"><span id="lang-label">EN</span></div>
+                    </div>
+                    <!-- 日夜切换 -->
+                    <div class="theme-switcher-wrap" onclick="toggleTheme()">
+                        <div class="theme-btn-box hover-target"><span id="theme-icon">◐</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME -->
+        <section id="home" class="hero-section">
+            <h1 class="hero-title">VISUAL<br>PORTFOLIO.</h1>
+            <!-- <p class="hero-subtitle" i18n="tagline">TECHNICAL ART & VISUAL SYSTEMS</p>-->
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="container-padding">
+            <div class="section-header-styled">
+                <h2 class="section-label t-about-title" i18n="about-title">ABOUT ME.</h2>
+                <div class="section-underline"></div>
+            </div>
+            <div class="about-layout">
+                <div class="about-text t-about-content" i18n="about-content">
+                </div>
+                <div class="about-image hover-target">
+                    <img src="ref/about.png" alt="Observer Portrait">
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOGS -->
+        <section id="blogs" class="container-padding">
+            <div class="section-header-styled">
+                <h2 class="section-label t-blogs-title" i18n="blogs-title">BLOGS.</h2>
+                <div class="section-underline"></div>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-line"><div class="parallax-dot" id="p-dot"></div></div>
+                <div class="blog-entry" onclick="window.location.href='blog_1.html'" style="cursor: pointer;">
+                    <div class="blog-content">
+                        <div class="blog-date">2026.05.04</div>
+                        <div class="blog-img-wrap hover-target"><img src="ref/blogs/hero1.png"></div>
+                        <h3 class="blog-title t-b1" i18n="b1">t</h3>
+                    </div>
+                </div>
+                <div class="blog-entry" onclick="window.location.href='blog_2.html'" style="cursor: pointer;">
+                    <div class="blog-content">
+                        <div class="blog-date">2026.04.12</div>
+                        <div class="blog-img-wrap hover-target"><img src="ref/blogs/blog2.JPG"></div>
+                        <h3 class="blog-title t-b2" i18n="b2">t</h3>
+                    </div>
+                </div>
+                <div class="blog-entry" onclick="window.location.href='blog_3.html'" style="cursor: pointer;">
+                    <div class="blog-content">
+                        <div class="blog-date">2024.05.07</div>
+                        <div class="blog-img-wrap hover-target"><img src="ref/blogs/hero3.png"></div>
+                        <h3 class="blog-title t-b3" i18n="b3">Communication in 2D Animation: Beyond Words and Visual Storytelling</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D ARCHIVE -->
+        <section id="portfolio-3d" class="container-padding bg-alt">
+            <div class="section-header-styled">
+                <h2 class="section-label t-3d-title" i18n="3d-title">3D ARCHIVE.</h2>
+                <div class="section-underline"></div>
+            </div>
+            
+            <div class="filter-bar" style="justify-content: flex-start; margin-bottom: 20px;">
+                <div class="filter-btn active hover-target" data-cat="all" data-target="grid-3d">ALL</div>
+                <div class="filter-btn hover-target t-group" data-cat="group" data-target="grid-3d" i18n="group">小组项目</div>
+                <div class="filter-btn hover-target t-anim" data-cat="anim" data-target="grid-3d" i18n="anim">动画</div>
+                <div class="filter-btn hover-target t-prop" data-cat="prop" data-target="grid-3d" i18n="prop">道具</div>
+                <div class="filter-btn hover-target t-render" data-cat="render" data-target="grid-3d" i18n="render">渲染</div>
+            </div>
+
+            <div class="portfolio-grid" id="grid-3d">
+                <div class="art-item size-large hover-target" data-cat="group" onclick="openDetail('p1')">
+                    <img src="ref/group.png">
+                    <div class="art-overlay">
+                        <h3 class="t-p1-title" i18n="p1_title">Mouldy Moira</h3>
+                        <p i18n="group">Group Project</p>
+                    </div>
+                </div>
+
+                <div class="art-item size-wide hover-target" data-cat="render" onclick="openDetail('p2')">
+                    <img src="ref/lighting_assignment_02.jpg">
+                    <div class="art-overlay">
+                        <h3 class="t-p2-title" i18n="p2_title">Lookdev & Lighting</h3>
+                        <p i18n="render">Render</p>
+                    </div>
+                </div>
+
+                <div class="art-item hover-target" data-cat="prop" onclick="openDetail('p3')">
+                    <img src="ref/robot3_original.jpeg">
+                    <div class="art-overlay">
+                        <h3 class="t-p3-title" i18n="p3_title">Asset Design</h3>
+                        <p i18n="prop">Prop</p>
+                    </div>
+                </div>
+
+                <div class="art-item hover-target" data-cat="anim" onclick="openDetail('p4')">
+                    <img src="ref/animationhero.jpg">
+                    <div class="art-overlay">
+                        <h3 class="t-p4-title" i18n="p4_title">Animation Practice</h3>
+                        <p i18n="anim">Blocking</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2D GALLERY -->
+        <section id="portfolio-2d" class="container-padding" style="border-top: var(--border);">
+            <div class="section-header-styled">
+                <h2 class="section-label t-2d-title">2D GALLERY.</h2>
+                <div class="section-underline"></div>
+            </div>
+            
+            <div class="filter-bar" style="justify-content: flex-start; margin-bottom: 20px;">
+                <div class="filter-btn active hover-target" data-cat="all" data-target="grid-2d">ALL</div>
+                <div class="filter-btn hover-target t-story" data-cat="story" data-target="grid-2d" i18n="story">故事板</div>
+                <div class="filter-btn hover-target t-anime" data-cat="anime" data-target="grid-2d" i18n="anime">动画</div>
+                <div class="filter-btn hover-target t-char" data-cat="char" data-target="grid-2d" i18n="char">人物</div>
+                <div class="filter-btn hover-target t-envi" data-cat="envi" data-target="grid-2d" i18n="envi">场景</div>
+                <div class="filter-btn hover-target t-sketch" data-cat="sketch" data-target="grid-2d" i18n="sketch">速写</div>
+            </div>
+
+            <div class="diamond-gallery" id="grid-2d">
+                <div class="diamond-item hover-target" data-cat="char" onclick="openDetail('p2d1')"><img src="ref/2d/ch1.png"><span class="art-tag-label t-char" i18n="char">人物</span></div>
+                <div class="diamond-item hover-target" data-cat="envi" onclick="openDetail('p2d2')"><img src="ref/2d/bg1.png"><span class="art-tag-label t-envi" i18n="envi">场景</span></div>
+                <div class="diamond-item hover-target" data-cat="sketch" onclick="openDetail('p2d3')"><img src="ref/2d/sk1.png"><span class="art-tag-label t-sketch" i18n="sketch">速写</span></div>
+                <div class="diamond-item hover-target" data-cat="anime" onclick="openDetail('p2d4')"><img src="ref/2d/7.gif"><span class="art-tag-label t-anime" i18n="anime">人物</span></div>
+                <div class="diamond-item hover-target" data-cat="envi" onclick="openDetail('p2d5')"><img src="ref/2d/bg2.png"><span class="art-tag-label t-envi" i18n="envi">场景</span></div>
+                <div class="diamond-item hover-target" data-cat="sketch" onclick="openDetail('p2d6')"><img src="ref/2d/sk2.png"><span class="art-tag-label t-sketch" i18n="sketch">速写</span></div>
+                <div class="diamond-item hover-target" data-cat="story" onclick="openDetail('p2d7')"><img src="ref/2d/story1.png"><span class="art-tag-label t-story" i18n="story">速写</span></div>
+                <div class="diamond-item hover-target" data-cat="sketch" onclick="openDetail('p2d8')"><img src="ref/2d/bg3.png"><span class="art-tag-label t-envi" i18n="envi">速写</span></div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT 区块：在此触发粒子星环聚合算法 -->
+        <section id="contact" class="contact-section">
+            <div class="contact-subtitle t-contact-sub" i18n="contact-sub">FINAL DESTINATION</div>
+            <div class="contact-ready t-contact-ready" i18n="contact-ready">Contact Info</div>
+            <div class="contact-footer-links">
+            <a href="hikarichiaki37@gmail.com" class="email-link">Email</a>
+            <span class="twitter">|</span>
+            <a>Twitter</a>
+            <span class="instagram">|</span>
+            <a>Instagram</a>
+        </div>
+        </section>
+    </main>
+
+    <!-- 返回顶部按钮 -->
+    <div id="back-to-top" class="hover-target" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <span>↑</span>
+    </div>
+
+    <!-- 详情弹窗 -->
+    <div id="detailModal" class="modal">
+        <div class="close-btn hover-target" onclick="closeDetail()">CLOSE ✕</div>
+        <div id="modalContent"></div>
+        <div class="modal-footer">
+            <h3 id="modalTitle" style="font-family: var(--font-serif); font-size: 32px; margin-bottom: 10px;"></h3>
+            <p id="modalDesc" style="color: var(--c-text-light);"></p>
+        </div>
+    </div>
+
+    <!-- 引入逻辑 -->
+    <script src="js/script.js"></script>
+</body>
+</html>

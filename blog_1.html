@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoughts & Insights | VI.STUDIO</title>
+    
+    <!-- 核心：完全依赖外部 CSS，实现代码分离 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 🌟 恢复自定义光标 -->
+    <div id="cursor"></div>
+
+    <!-- 独立的精美导航栏，已补回切换按钮和 hover 效果 -->
+    <header class="standalone-header">
+        <a href="index.html" class="standalone-logo hover-target"><span></span>STUDIO</a>
+        <div style="display: flex; align-items: center; gap: 40px;">
+            <nav class="standalone-nav">
+                <!-- 增加了 t-* 翻译标签，确保中英切换时导航跟着变 -->
+                <a href="index.html#about" class="hover-target t-about">ABOUT</a>
+                <a href="#" class="active hover-target t-blogs">BLOGS</a>
+                <a href="index.html#portfolio-3d" class="hover-target t-portfolio">PORTFOLIO</a>
+                <a href="index.html#contact" class="hover-target t-contact">CONTACT</a>
+            </nav>
+            <!-- 🌟 恢复中英与日夜切换按钮 -->
+            <div class="ctrl-btns">
+                <div class="lang-switcher-wrap" onclick="toggleLang()">
+                    <div class="lang-btn-box hover-target"><span id="lang-label">EN</span></div>
+                </div>
+                <div class="theme-switcher-wrap" onclick="toggleTheme()">
+                    <div class="theme-btn-box hover-target"><span id="theme-icon">◐</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="blogs-page-main">
+        <article class="blog-flow-wrapper">
+            
+            <header class="blog-header">
+                <div class="blog-tag">Technical Insight</div>
+                <!-- 加上 t-b1 让标题也能支持双语切换 -->
+                <h1 class="blog-title t-b1">t</h1>
+                <div class="blog-meta">
+                    <div class="meta-box"><span>DATE</span><b>2026.05.04</b></div>
+                    <div class="meta-box"><span>AUTHOR</span><b>YOUR NAME</b></div>
+                    <div class="meta-box"><span>TAGS</span><b>#ThreeJS #TA</b></div>
+                </div>
+            </header>
+
+            <!-- 博客主图 -->
+            <img src="ref/blogs/hero1.png" class="blog-hero" alt="Hero">
+
+            <!-- 博客正文 -->
+            <div class="blog-content-body">
+                <p class="blog-text">
+                    <strong>I</strong> recently completed a school animation project. 
+                    Although this was not my first experience working in a group, 
+                    it was the first time I had completed a full 3D animated short 
+                    film as part of a team. The group itself was fairly large, 
+                    and the project lasted from last year's R&D stage into this year, 
+                    a much longer period than I initially expected. 
+                    At first, I believed we had more than enough time, but I was completely wrong.                
+                </p>
+
+                <h3 class="blog-subtitle">The Importance of Visual Consistency</h3>
+                <p class="blog-text">
+                    <strong>In</strong> collaborative animation production, 
+                    maintaining a unified visual style is often considered 
+                    essential to the integrity of the project. However, 
+                    during the actual production process, individual artistic 
+                    expression and different creative habits can easily disrupt 
+                    that sense of consistency. As the director, one of the first 
+                    mistakes I made was failing to ensure that every team member 
+                    clearly understood the visual direction we were aiming for. 
+                    For animated works, visual consistency not only helps maintain 
+                    audience immersion, but also supports asset integration and shot 
+                    continuity during post-production. Even after we recognised and 
+                    adjusted this issue, the production process was still far from smooth.                
+                </p>
+                
+                <!-- <img src="" class="blog-image" alt="Process"> -->
+
+                <p class="blog-text">
+                    <strong>As</strong> the project progressed, I began to realise 
+                    that everyone had slightly different ideas about what “visual consistency” meant. 
+                    Some members believed the visual design should reflect the worldbuilding 
+                    and narrative background more strongly, while others preferred a simpler 
+                    style in order to save production time. There were also differences in 
+                    how people interpreted the core themes of the story, which led to completely 
+                    different visual preferences. We all expressed our own opinions, 
+                    and this was not entirely a negative thing — in some ways, 
+                    it expanded the creative possibilities of the project. However, 
+                    from a production standpoint, these discussions and revisions significantly slowed down our workflow.
+                </p>
+                <p class="blog-text">
+                    <strong>In</strong> order to maintain overall consistency, 
+                    I eventually had to make the final decisions myself, which inevitably 
+                    limited some members' space for personal expression. Yet even 
+                    when the team shared the same visual development references, 
+                    individual traces still appeared through shape language, animation timing, 
+                    and colour preferences. These differences became especially noticeable 
+                    during the later stages of production, when all assets were finally 
+                    placed within the same cinematic language.
+                </p>
+                <h3 class="blog-subtitle">Reflection</h3>
+                <p class="blog-text">
+                    <strong>Through</strong> this project, I gradually realised that unity 
+                    within collaborative work does not mean completely erasing individual style. 
+                    Instead, it is more like a continuous process of negotiation and balance. 
+                    Perhaps what truly matters is not making everyone identical, but finding a 
+                    way for different forms of expression to coexist within a shared creative framework.
+                </p>
+            </div>
+
+            <!-- 返回按钮 -->
+            <div class="back-btn-container">
+                <a href="index.html" class="back-btn hover-target">← BACK TO HOME</a>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- 🌟 必须在页面最底部引入 JS，才能让光标和切换按钮动起来 -->
+    <script src="js/script.js"></script>
+</body>
+</html>

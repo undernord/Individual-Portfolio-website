@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoughts & Insights | VI.STUDIO</title>
+    
+    <!-- 核心：完全依赖外部 CSS，实现代码分离 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 🌟 恢复自定义光标 -->
+    <div id="cursor"></div>
+
+    <!-- 独立的精美导航栏，已补回切换按钮和 hover 效果 -->
+    <header class="standalone-header">
+        <a href="index.html" class="standalone-logo hover-target"><span></span>STUDIO</a>
+        <div style="display: flex; align-items: center; gap: 40px;">
+            <nav class="standalone-nav">
+                <!-- 增加了 t-* 翻译标签，确保中英切换时导航跟着变 -->
+                <a href="index.html#about" class="hover-target t-about">ABOUT</a>
+                <a href="#" class="active hover-target t-blogs">BLOGS</a>
+                <a href="index.html#portfolio-3d" class="hover-target t-portfolio">PORTFOLIO</a>
+                <a href="index.html#contact" class="hover-target t-contact">CONTACT</a>
+            </nav>
+            <!-- 🌟 恢复中英与日夜切换按钮 -->
+            <div class="ctrl-btns">
+                <div class="lang-switcher-wrap" onclick="toggleLang()">
+                    <div class="lang-btn-box hover-target"><span id="lang-label">EN</span></div>
+                </div>
+                <div class="theme-switcher-wrap" onclick="toggleTheme()">
+                    <div class="theme-btn-box hover-target"><span id="theme-icon">◐</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="blogs-page-main">
+        <article class="blog-flow-wrapper">
+            
+            <header class="blog-header">
+                <div class="blog-tag">Technical Insight</div>
+                <!-- 加上 t-b1 让标题也能支持双语切换 -->
+                <h1 class="blog-title t-b2">t</h1>
+                <div class="blog-meta">
+                    <div class="meta-box"><span>DATE</span><b>2026.05.04</b></div>
+                    <div class="meta-box"><span>AUTHOR</span><b>YOUR NAME</b></div>
+                    <div class="meta-box"><span>TAGS</span><b>#ThreeJS #TA</b></div>
+                </div>
+            </header>
+
+            <!-- 博客主图 -->
+            <img src="ref/blogs/blog2.JPG" class="blog-hero" alt="Hero">
+
+            <!-- 博客正文 -->
+            <div class="blog-content-body">
+                <p class="blog-text">
+                    <strong>While</strong> looking for visual references for my group project, I watched an animated film called Klaus. At first, I thought it was a 3D animation, but after reading about it, I realised it is actually a 2D film that uses digital lighting techniques to enhance its visuals. What stood out to me was how it uses technology to support a hand-drawn look rather than replace it. It made me realise that digital tools do not always lead to a mechanical style, but can also help recreate more traditional, textured aesthetics.               
+                </p>
+                <p class="blog-text">
+                    <strong>This</strong> blending of 2D and 3D styles has become quite common in recent animation. 
+                    For example, <em>Spider-Man: Into the Spider-Verse</em> uses techniques like halftone textures 
+                    and frame variation to mimic comic book visuals, while <em>Demon Slayer: Kimetsu no Yaiba </em>combines 3D camera movement with 2D animation and digital compositing to create more dynamic action scenes. These examples show how digital tools are increasingly shaping the visual language of animation and expanding what is visually possible.               
+                </p>
+
+                <p class="blog-text">
+                    <strong>In</strong> contrast, the work of Hayao Miyazaki represents a more traditional hand-drawn approach. His films keep a strong sense of the hand-made quality in each frame, which gives them a more organic feel. This difference made me think about how increasing use of digital tools might be changing the way animation looks and feels, not just how it is produced.
+                </p>
+                <p class="blog-text">
+                    <strong>When</strong> we move from these larger artistic benchmarks back to the reality of production, this discussion becomes much more concrete. In any standardised animation pipeline, technical limitations often play a major role in shaping the visual direction of a project.
+                </p>
+                <p class="blog-text">
+                    <strong>For</strong> example, in most group projects, the final visual style is usually the result of a constant negotiation between rendering capacity, time constraints, and artistic intention. In many cases, to achieve acceptable visual quality within limited render budgets, decisions have to be made between model detail and the effectiveness of post-production. These trade-offs made under production constraints are, in effect, where technology begins to influence aesthetic choices.
+                </p>
+                <p class="blog-text">
+                    <strong>This</strong> suggests that technology is not simply a downstream tool for execution. From the early planning stages, it already plays a role in defining the visual boundaries of a project. In this sense, technology and aesthetics are not separate or sequential, but are continuously shaping each other within the production process.
+                </p>
+            </div>
+
+            <!-- 返回按钮 -->
+            <div class="back-btn-container">
+                <a href="index.html" class="back-btn hover-target">← BACK TO HOME</a>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- 🌟 必须在页面最底部引入 JS，才能让光标和切换按钮动起来 -->
+    <script src="js/script.js"></script>
+</body>
+</html>

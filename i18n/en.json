@@ -1,0 +1,48 @@
+ { 
+        "label": "EN", 
+        "about": "ABOUT", 
+        "blogs": "BLOGS", 
+        "portfolio": "PORTFOLIO ▼", 
+        "3d": "3D ARCHIVE", 
+        "2d": "2D GALLERY", 
+        "contact": "CONTACT", 
+        "tagline": "TECHNICAL ART & VISUAL SYSTEMS", 
+        "about-title": "ABOUT ME.", 
+        "blogs-title": "THOUGHT_STREAM.", 
+        "about-content": "Hi, I'm Michel, A college sophomore from Brounemouth. I'm pursuing a career in story / visual development. <br><br> I'm planning to apply for a master's degree in animation. <br><br>  ", 
+        "b1": "Visual Consistency vs Individual Expression in Collaborative Animation", 
+        "b2": "Beyond Tools in Animation Production", 
+        "b3": "Communication in Animation: Beyond Words and Visual Storytelling", 
+
+
+
+        "3d-title": "3D ARCHIVE.", 
+        "p1_title": "Mouldy Moira",
+        "p1_content_1":"This was a group project I participated in during my sophomore year. It was written by a unique author and we were tasked with creating the promotional animation.Redesigning the character and deconstructing the story made me feel familiar, which I am interested in creating fan fictions. But It's also  a great challenge for me in the project with many group members, based on an athor's original poem, exploring Moira's life through the lens of the story.",
+        "p1_content_2":"I aimed to externalize Moira’s psychological state through shifts incolor tonality, utilizing the contrast between warm and cool lightingto establish the narrative atmosphere.",
+        "p2_title": "Lookdev&Lighting",
+        "p2_content_1":" In this project, my first idea was to show people experiencing a crisis and staying calm and optimistic. After deciding on the concept, I chose astronauts as the main character and used space as the background.<br><br>The scene tells the story of two astronauts on the surface of the Moon. They calmly face the end, even though they can no longer contact Earth. Their spacecraft is exposed to the vacuum, food inside the cabin is running out, and backup power is almost gone. Outside, the Earth is shined under the sunlight. Nearby, a space station that has clearly stopped working floats silently in space, appearing like a symbol of hope. Pages and liquid float in zero gravity, while the astronauts are still holding drink packs and making a toast.<br><br>The scene contains many elements that conflict with reality, but the characters on screen face problems even more cruel than those in real life. So, in the visual design, I followed the same idea. I created a relatively realistic space environment to give the scene a more complex and mostly sad emotion. I used V-Ray for Maya to convey the mood and simulate the planets and surroundings of space.",
+        "p3_title": "Asset Design",
+        "p3_content_1":"This is my first hard surface modelling project, it is clear that I am still quite inexperienced with topology and material work. However, it was still a very meaningful learning experience.",
+        "p3_content_2":"This giraffe was created and textured in ZBrush. I am quite satisfied with the accuracy of the front view, although the stance feels slightly unstable.",
+        "p4_title": "Animation Practise",
+        "p4_content_1":"The reference for this animation was based on a walking video that I recorded myself.<br><br>Looking back, I do not think I approached this project seriously enough, and many details lacked deeper observation and refinement. Although there were several factors that interfered with the production process, the project still became a valuable learning experience for me.",
+        "p4_content_2":"This is a simple blocking exercise I completed earlier this year. I think the timing and rhythm could still be refined further.<br><br>I especially like the moment of suspension in the middle of the movement.",
+        "anim": "ANIMATION", 
+        "prop": "PROP", 
+        "render": "RENDER", 
+        "group": "GROUP PROJECT",
+
+
+        "2d-title": "2D GALLERY.", 
+        "story": "STORYBOARD    ",
+        "anime": "ANIMATION",
+        "char": "CHARACTER", 
+        "envi": "ENVIRONMENT", 
+        "sketch": "SKETCH", 
+
+
+        "contact-ready": "Contact Info", 
+        "contact-sub": "FINAL DESTINATION"
+
+    }

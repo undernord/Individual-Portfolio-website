@@ -1,0 +1,419 @@
+/* ==========================================
+   1. 调色盘与基础
+   ========================================== */
+:root {
+    --c-bg: #F7F8F3;       
+    --c-bg-alt: rgba(255, 255, 255, 0.55);   
+    --c-text: #2C302E;     
+    --c-text-light: #8A908D;
+    --c-accent: #A5BA4F;   
+    --c-hud-line: #4A5D23; 
+    --border: none ; 
+    --font-sans: "Helvetica Neue", "PingFang SC", Arial, sans-serif;
+    --font-serif: "Playfair Display", "Didot", "Georgia", serif;
+}
+
+body.dark-mode {
+    --c-bg: #141514;
+    --c-bg-alt: rgba(26, 28, 27, 0.65);
+    --c-text: #F7F8F3;
+    --c-text-light: #8A908D;
+    --c-accent: #A5BA4F;
+    --c-hud-line: #A5BA4F;
+    --border: none ;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--c-bg); color: var(--c-text);
+    font-family: var(--font-sans); line-height: 1.7; overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.bg-alt { 
+    background-color: var(--c-bg-alt); 
+    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
+    transition: background-color 0.5s ease; 
+}
+
+/* ==========================================
+   2. 粒子加载动画与侧边栏
+   ========================================== */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--c-bg); z-index: 30000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+#preloader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
+
+#particle-diamond {
+    display: grid;
+    grid-template-columns: repeat(15, 3px);
+    grid-template-rows: repeat(15, 3px);
+    gap: 2px;
+    margin-bottom: 20px;
+}
+.p-dot {
+    width: 100%; height: 100%;
+    background-color: var(--c-accent);
+    border-radius: 50%; opacity: 0.2;
+    animation: pulse 1s infinite alternate;
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 1s ease;
+    will-change: transform, opacity;
+}
+.p-spacer { width: 100%; height: 100%; }
+
+@keyframes pulse {
+    0% { opacity: 0.05; transform: scale(0.2); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+.p-dot.scatter {
+    animation: none !important;
+    transform: translate(var(--dx), var(--dy)) scale(2.5) !important;
+    opacity: 0 !important;
+}
+
+.loader-text {
+    font-size: 10px; font-weight: 800; letter-spacing: 4px;
+    color: var(--c-text-light); text-transform: uppercase;
+    transition: opacity 0.5s ease;
+}
+.hide-text { opacity: 0 !important; }
+
+/* 侧边栏 */
+.hud-pagination {
+    position: fixed; left: 45px; top: 50%; transform: translateY(-50%);
+    z-index: 100; display: flex; flex-direction: column; align-items: center; gap: 35px;
+}
+.hud-line { position: absolute; width: 1px; height: 100%; background: var(--c-text-light); opacity: 0.2; z-index: -1; }
+.hud-dot { 
+    width: 10px; height: 10px; background: var(--c-text-light); border-radius: 50%; 
+    position: relative; display: flex; align-items: center; justify-content: center; transition: 0.3s; 
+}
+.hud-dot.active { background: transparent; }
+
+.hud-dot .diamond {
+    position: absolute; width: 22px; height: 22px; border: 1.5px solid var(--c-hud-line);
+    transform: rotate(45deg) scale(0); opacity: 0; transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    display: flex; align-items: center; justify-content: center; background: transparent;
+}
+.hud-dot.active .diamond { transform: rotate(45deg) scale(1); opacity: 1; border-color: var(--c-accent); }
+.hud-dot.active .num { color: var(--c-accent); }
+.hud-dot:hover .diamond { background-color: var(--c-accent); border-color: var(--c-accent); transform: rotate(45deg) scale(1.3); opacity: 1; }
+.hud-dot:hover .num { opacity: 0; }
+.hud-dot .num { position: absolute; transform: rotate(-45deg); font-size: 10px; font-weight: 800; color: var(--c-hud-line); transition: 0.2s; }
+
+/* ==========================================
+   3. 顶栏导航与控制按钮
+   ========================================== */
+header { position: fixed; top: 0; width: 100%; height: 90px; z-index: 95; display: flex; align-items: center; transition: background 0.5s ease; }
+.nav-container { width: 100%; padding: 0 5%; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 16px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
+
+.nav-right-area { display: flex; align-items: center; gap: 40px; }
+.nav-links { display: flex; gap: 35px; }
+.nav-item { position: relative; }
+.nav-item > a { text-decoration: none; color: var(--c-text); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 10px 0; transition: 0.3s; }
+.nav-item > a:hover, .nav-item > a.active { color: var(--c-accent); }
+
+.dropdown {
+    position: absolute; top: 100%; left: 0; transform: translateY(10px);
+    background: var(--c-bg); border: var(--border); border-radius: 2px; padding: 10px 0; min-width: 170px;
+    opacity: 0; visibility: hidden; transition: 0.3s, background-color 0.5s; box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+    display: flex; flex-direction: column; text-align: left;
+}
+.nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown a { text-decoration: none; color: var(--c-text); font-size: 10px; font-weight: 700; padding: 12px 20px; transition: 0.3s; letter-spacing: 1px;}
+.dropdown a:hover { color: var(--c-accent); background: var(--c-bg-alt); }
+
+.ctrl-btns { display: flex; align-items: center; gap: 25px; }
+.lang-btn-box, .theme-btn-box {
+    width: 28px; height: 28px; border: 1.5px solid var(--c-hud-line);
+    transform: rotate(45deg); display: flex; align-items: center; justify-content: center;
+    transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.lang-btn-box:hover, .theme-btn-box:hover { background-color: var(--c-accent); border-color: var(--c-accent); transform: rotate(45deg) scale(1.2); }
+.lang-btn-box span, .theme-btn-box span { transform: rotate(-45deg); font-size: 9px; font-weight: 900; color: var(--c-hud-line); transition: color 0.3s;}
+.lang-btn-box:hover span, .theme-btn-box:hover span { color: var(--c-bg); }
+
+/* ==========================================
+   4. 页面布局与左右排版
+   ========================================== */
+section { width: 100%; min-height: 100vh; position: relative; }
+.container-padding { padding: 180px 10% 180px 15%; }
+
+.section-header-styled { margin-bottom: 50px; } 
+.section-label { 
+    font-family: var(--font-serif); font-size: 36px; font-weight: 700; 
+    text-transform: uppercase; color: var(--c-text);
+    margin-bottom: 15px; display: block; letter-spacing: 1px;
+}
+.section-underline { width: 120px; height: 2px; background-color: var(--c-text); }
+
+/* 强制锁死：左文字，右图片 */
+#about { display: flex; flex-direction: column; justify-content: center; min-height: 100vh; }
+.about-layout { 
+    display: flex !important; 
+    flex-direction: row !important; 
+    align-items: center; 
+    justify-content: space-between;
+    gap: 60px; 
+    width: 100%; 
+}
+.about-text { flex: 1; font-size: 16px; }
+.about-image { 
+    flex: 0 0 35%; 
+    max-width: 450px;
+    aspect-ratio: 1/1; 
+    border-radius: 4px; 
+    overflow: hidden; 
+    border: var(--border); 
+    background: transparent; 
+}
+.about-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1); }
+
+#canvas-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
+#cursor { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background-color: var(--c-accent); border-radius: 50%; pointer-events: none; z-index: 90000; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; }
+
+.hero-section { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; width: 100%; min-height: 100vh; }
+.hero-title { font-family: var(--font-serif); font-size: 9vw; font-weight: 400; line-height: 0.95; letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* ==========================================
+   5. Blogs 与画廊
+   ========================================== */
+.timeline-container { position: relative; padding: 50px 0; margin-top: 40px; }
+.timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(0,0,0,0.08); z-index: 0; }
+body.dark-mode .timeline-line { background: rgba(255,255,255,0.1); }
+.parallax-dot { position: absolute; left: 0; width: 6px; height: 60px; background: var(--c-accent); border-radius: 3px; transform: translateX(-50%); transition: 0.1s linear; z-index: 5; }
+
+.blog-entry { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 140px; position: relative; will-change: transform; }
+.blog-entry:nth-child(even) { flex-direction: row-reverse; }
+.blog-content { width: 30%; transition: 0.7s ease; transform: scale(0.95); opacity: 0.6; }
+.blog-entry:hover .blog-content { transform: scale(1.05); opacity: 1; }
+
+.blog-img-wrap { width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 4px; margin-bottom: 15px; border: var(--border); background: #eee; }
+.blog-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.5); transition: 1.2s; }
+.blog-entry:hover img { filter: saturate(1.1); transform: scale(1.05); }
+.blog-title { font-family: var(--font-serif); font-size: 20px; color: var(--c-text); line-height: 1.4; }
+.blog-date { font-size: 9px; letter-spacing: 2px; color: var(--c-text-light); text-transform: uppercase; margin-bottom: 10px; }
+
+.filter-bar { display: flex; gap: 25px; margin-bottom: 50px; }
+.filter-btn { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--c-text-light); transition: 0.3s; border-bottom: 2px solid transparent; padding: 6px 0; cursor: pointer !important; }
+.filter-btn.active { color: var(--c-text); border-bottom-color: var(--c-accent); }
+
+.portfolio-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 320px; gap: 40px; grid-auto-flow: dense; margin-top: 40px; }
+.art-item { position: relative; border-radius: 4px; overflow: hidden; border: var(--border); background: #eee; }
+.art-item img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1); filter: saturate(0.8); }
+.art-item:hover img { transform: scale(1.1); filter: saturate(1.1); }
+.art-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px 20px 20px; background: linear-gradient(transparent, rgba(0,0,0,0.6)); color: #fff; opacity: 0; transition: 0.4s; }
+.art-item:hover .art-overlay { opacity: 1; }
+
+.size-large { grid-column: span 2; grid-row: span 2; }
+.size-wide { grid-column: span 2; grid-row: span 1; }
+.size-tall { grid-column: span 1; grid-row: span 2; }
+
+.diamond-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 40px; }
+.diamond-item { position: relative; width: 100%; aspect-ratio: 1/1; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); overflow: hidden; transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1); background: #eee; }
+.diamond-item img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.6); transition: 0.8s; }
+.diamond-item:hover { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); transform: scale(1.1); z-index: 10; }
+.art-tag-label { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-size: 8px; font-weight: 800; letter-spacing: 2px; color: #fff; background: var(--c-hud-line); padding: 4px 8px; border-radius: 2px; opacity: 0; transition: 0.3s; pointer-events: none; }
+.diamond-item:hover .art-tag-label { opacity: 1; }
+
+.gallery-text { font-size: 16px; line-height: 2; color: var(--c-text); margin: 30px 0; text-align: justify; }
+.gallery-text strong { color: var(--c-accent); font-weight: bold; }
+.gallery-subtitle { font-family: var(--font-serif); font-size: 24px; margin: 60px 0 20px; color: var(--c-text);}
+/* ==========================================
+   6. Contact 区块收纳整合
+   ========================================== */
+.contact-section { 
+    display: flex; flex-direction: column; justify-content: center; align-items: center; 
+    min-height: 100vh; text-align: center; border-top: var(--border); background: transparent; 
+}
+.contact-subtitle { font-size: 11px; font-weight: 700; color: var(--c-text-light); letter-spacing: 4px; margin-bottom: 20px; }
+.contact-ready { font-size: 30px; letter-spacing: 5px; font-weight: 350; font-family: var(--font-serif); margin-bottom: 50px; text-transform: uppercase;}
+.contact-divider { width: 100%; max-width: 900px; height: 1px; background: rgba(44, 48, 46, 0.1); margin-bottom: 40px; }
+body.dark-mode .contact-divider { background: rgba(247, 248, 243, 0.1); }
+/* 3. 整合邮箱与社交链接到同一行 (类似 P2 底部) */
+.contact-footer-links { margin-top: 0; display: flex; align-items: center; gap: 30px; }
+.email-link { font-size: 14px; font-weight: 700; text-decoration: none; color: var(--c-text); transition: 0.3s; letter-spacing: 2px; text-transform: uppercase; }
+.email-link:hover { color: var(--c-accent); }
+.contact-footer-links a { color: var(--c-text-light); text-decoration: none; font-size: 11px; font-weight: 700; letter-spacing: 2px; transition: 0.3s; text-transform: uppercase; }
+.contact-footer-links a:hover { color: var(--c-accent); }
+/* 4. P2 风格的分隔符样式 */
+.link-sep { color: rgba(44, 48, 46, 0.2); font-size: 12px; }
+/* ==========================================
+   7. 弹窗与控制件
+   ========================================== */
+#back-to-top {
+    position: fixed; bottom: 40px; right: 40px; width: 40px; height: 40px;
+    border: 1.5px solid var(--c-hud-line); transform: rotate(45deg);
+    display: flex; align-items: center; justify-content: center; z-index: 90;
+    opacity: 0; visibility: hidden; transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    background: var(--c-bg);
+}
+#back-to-top.show { opacity: 1; visibility: visible; }
+#back-to-top:hover { background-color: var(--c-accent-hover); border-color: var(--c-accent-hover); transform: rotate(45deg) scale(1.1); }
+#back-to-top span { transform: rotate(-45deg); color: var(--c-hud-line); font-size: 14px; font-weight: bold; transition: color 0.3s; }
+#back-to-top:hover span { color: var(--c-bg); }
+#back-to-top.show { opacity: 1; visibility: visible; }
+#back-to-top:hover { background-color: var(--c-accent) !important; border-color: var(--c-accent) !important; }
+#back-to-top span { transform: rotate(-45deg); color: var(--c-hud-line); font-size: 14px; font-weight: bold; transition: color 0.3s; }
+#back-to-top:hover span { color: var(--c-bg) !important; }
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--c-bg); z-index: 9999; display: none; overflow-y: scroll; transition: background 0.5s ease; }
+.close-btn { position: fixed; bottom: 40px; right: 60px; z-index: 10010; padding: 12px 25px; background: var(--c-bg-alt); border-radius: 30px; border: var(--border); font-size: 11px; font-weight: 700; transition: 0.3s; text-transform: uppercase; color: var(--c-text); }
+.close-btn:hover { background: var(--c-accent-hover); color: #fff; }
+
+/* ==========================================
+   8. 响应式布局适配
+   ========================================== */
+@media (max-width: 1024px) {
+    .about-layout { flex-direction: column !important; gap: 40px; }
+    .about-image { width: 100%; max-width: none; aspect-ratio: 16/9; }
+    .portfolio-grid, .diamond-gallery { grid-template-columns: repeat(2, 1fr); }
+    .hud-pagination { display: none; }
+    .blog-entry { flex-direction: column !important; gap: 40px; transform: none !important; }
+    .blog-content { width: 100%; }
+    .timeline-line, .parallax-dot { display: none; }
+    .container-padding { padding: 120px 5%; }
+}
+.threed-detail-wrap {
+    padding: 60px 10%;
+    color: var(--c-text);
+}
+
+/* ==========================================
+   全新弹窗详情页排版 (3D & 2D)
+   ========================================== */
+.detail-wrapper {
+    padding: 120px 10% 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: var(--c-text);
+}
+
+/* 标题与参数区 */
+.detail-header {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 50px;
+    border-bottom: var(--border);
+    padding-bottom: 40px;
+}
+.detail-title {
+    font-family: var(--font-serif);
+    font-size: 48px;
+    line-height: 1.1;
+}
+.detail-meta {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+.meta-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.meta-box span {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--c-text-light);
+}
+.meta-box b {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* 主图与拆解网格 */
+.detail-hero img {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+
+/* 文本描述区 */
+.detail-desc h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--c-accent);
+    margin-bottom: 15px;
+}
+.detail-desc p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--c-text);
+    max-width: 800px;
+}
+
+.lightbox-style { padding: 60px 2%; display: flex; flex-direction: column; align-items: center; }
+.lightbox-image { width: 100%; max-width: 1200px; margin-bottom: 20px; }
+.lightbox-image img { width: 100%; height: auto; display: block; border-radius: 2px; }
+.lightbox-caption h1 { font-size: 14px; font-weight: 400; color: var(--c-text-light); letter-spacing: 1px; }
+@media (max-width: 768px) {
+    .detail-grid { grid-template-columns: 1fr; }
+    .detail-meta { flex-direction: column; gap: 20px; }
+    .detail-title { font-size: 32px; }
+}
+
+
+.standalone-header {
+    position: fixed; top: 0; left: 0; width: 100%;
+    padding: 25px 5%; display: flex; justify-content: space-between;
+    align-items: center; background: rgba(247,248,243,0.95);
+    backdrop-filter: blur(10px); z-index: 1000;
+    box-sizing: border-box; border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* 🌟 夜间模式：顶栏背景变黑 */
+body.dark-mode .standalone-header {
+    background: rgba(26,26,26,0.95);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.standalone-logo { font-size: 16px; font-weight: 800; letter-spacing: 2px; cursor: pointer; color: var(--c-text); text-decoration: none;}
+.standalone-logo span { color: var(--c-accent); }
+.standalone-nav { display: flex; gap: 40px; }
+.standalone-nav a { text-decoration: none; color: var(--c-text); font-size: 11px; font-weight: 700; letter-spacing: 2px; transition: 0.3s;}
+.standalone-nav a:hover, .standalone-nav a.active { color: var(--c-accent); }
+
+.blogs-page-main { padding-top: 140px; padding-bottom: 100px; }
+.blog-flow-wrapper { max-width: 800px; margin: 0 auto; padding: 0 5%; box-sizing: border-box;}
+
+.blog-header { margin-bottom: 60px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 40px; }
+
+/* 夜间模式：分割线变暗 */
+body.dark-mode .blog-header { border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+.blog-tag { font-size: 11px; font-weight: 800; letter-spacing: 3px; color: var(--c-accent); margin-bottom: 20px; text-transform: uppercase; }
+
+/* 🌟 限定只在博客页生效，修复主页字体变大 Bug */
+.blog-flow-wrapper .blog-title { font-family: var(--font-serif); font-size: clamp(32px, 4vw, 42px); line-height: 1.3; margin-bottom: 30px; margin-top:0; color: var(--c-text);}
+
+.blog-meta { display: flex; gap: 40px; flex-wrap: wrap; }
+.meta-box span { display: block; font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--c-text-light); margin-bottom: 8px; text-transform: uppercase;}
+.meta-box b { font-size: 13px; font-weight: 600; color: var(--c-text);}
+
+.blog-hero { width: 100%; border-radius: 4px; margin-bottom: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+/* 🌟 把写死的 #333 颜色改成了 var(--c-text)，让它白天黑夜都能自动变色！ */
+.blog-text { font-size: 16px; line-height: 2; color: var(--c-text); margin: 30px 0; text-align: justify; }
+.blog-text strong { color: var(--c-accent); font-weight: bold; }
+.blog-subtitle { font-family: var(--font-serif); font-size: 24px; margin: 60px 0 20px; color: var(--c-text);}
+.blog-image { width: 100%; border-radius: 4px; margin: 40px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.03); }
+
+.back-btn-container { margin-top: 100px; text-align: center; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 60px; }
+
+/* 夜间模式：底部返回区域分割线 */
+body.dark-mode .back-btn-container { border-top: 1px solid rgba(255,255,255,0.1); }
+
+.back-btn { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-decoration: none; color: var(--c-text-light); padding-bottom: 5px; border-bottom: 1px solid var(--c-text-light); transition: 0.3s; }
+.back-btn:hover { color: var(--c-accent); border-color: var(--c-accent); }
+

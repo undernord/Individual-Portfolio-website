@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thought Stream | VI.STUDIO</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery2.1.4.min.js"></script>
+    <script src="js/jquery.i18n.min.js"></script>
+    <script src="js/en-zh_translate.js"></script>
+</head>
+<body>
+
+    <!-- 自定义光标 -->
+    <div id="cursor"></div>
+
+    <!-- 顶栏导航 -->
+    <header class="standalone-header">
+        <a href="index.html" class="standalone-logo hover-target"><span></span>STUDIO</a>
+        <div style="display: flex; align-items: center; gap: 40px;">
+            <nav class="standalone-nav">
+                <a href="index.html#about" class="hover-target t-about">ABOUT</a>
+                <a href="blogs.html" class="active hover-target t-blogs">BLOGS</a>
+                <a href="index.html#portfolio-3d" class="hover-target t-portfolio">PORTFOLIO</a>
+                <a href="index.html#contact" class="hover-target t-contact">CONTACT</a>
+            </nav>
+            <div class="ctrl-btns">
+                <!-- 中英切换 -->
+                <div class="lang-switcher-wrap" id="translate-btn">
+                    <div class="lang-btn-box hover-target"><span id="lang-label">EN</span></div>
+                </div>
+                <!-- 日夜切换 -->
+                <div class="theme-switcher-wrap" onclick="toggleTheme()">
+                    <div class="theme-btn-box hover-target"><span id="theme-icon">◐</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="blogs-page-main" style="padding-top: 140px; min-height: 85vh;">
+        <!-- BLOGS 时间轴 -->
+        <section id="blogs" class="container-padding" style="padding-top: 20px;">
+            <div class="section-header-styled">
+                <h2 class="section-label t-blogs-title" i18n="blogs-title">THOUGHT_STREAM.</h2>
+                <div class="section-underline"></div>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-line"><div class="parallax-dot" id="p-dot"></div></div>
+
+                <!-- Blog 1 -->
+                <div class="blog-entry" onclick="window.location.href='blog_1.html'" style="cursor: pointer;">
+                    <div class="blog-content">
+                        <div class="blog-date">2026.05.04</div>
+                        <div class="blog-img-wrap hover-target"><img src="ref/blogs/hero1.png" alt="Blog 1"></div>
+                        <h3 class="blog-title t-b1" i18n="b1">Visual Consistency vs Individual Expression in Collaborative Animation</h3>
+                    </div>
+                </div>
+
+                <!-- Blog 2 -->
+                <div class="blog-entry" onclick="window.location.href='blog_2.html'" style="cursor: pointer;">
+                    <div class="blog-content">
+                        <div class="blog-date">2026.04.12</div>
+                        <div class="blog-img-wrap hover-target"><img src="ref/blogs/blog2.JPG" alt="Blog 2"></div>
+                        <h3 class="blog-title t-b2" i18n="b2">Beyond Tools in Animation Production</h3>
+                    </div>
+                </div>
+
+                <!-- Blog 3 -->
+                <div class="blog-entry" onclick="window.location.href='blog_3.html'" style="cursor: pointer;">
+                    <div class="blog-content">
+                        <div class="blog-date">2024.05.07</div>
+                        <div class="blog-img-wrap hover-target"><img src="ref/blogs/hero3.png" alt="Blog 3"></div>
+                        <h3 class="blog-title t-b3" i18n="b3">Communication in 2D Animation: Beyond Words and Visual Storytelling</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 返回首页按钮 -->
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="index.html" class="back-btn hover-target">← BACK TO HOME</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 返回顶部按钮 -->
+    <div id="back-to-top" class="hover-target" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <span>↑</span>
+    </div>
+
+    <!-- 核心逻辑 -->
+    <script src="js/script.js"></script>
+</body>
+</html>
